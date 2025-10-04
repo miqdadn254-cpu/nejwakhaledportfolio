@@ -2,83 +2,143 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* 
+🎨 Najwa Khaled Design System
+Elegant, editorial-style portfolio theme.
+All core colors defined in HSL for Tailwind variables.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 7%;
-    --foreground: 40 20% 92%;
+    /* ===== Core Colors ===== */
+    --background: 30 10% 8%;          /* Charcoal Black */
+    --foreground: 42 20% 92%;         /* Soft Warm White */
 
-    --card: 0 0% 10%;
-    --card-foreground: 40 20% 92%;
+    --card: 30 10% 10%;               /* Deep Charcoal */
+    --card-foreground: 42 20% 92%;    
 
-    --popover: 0 0% 10%;
-    --popover-foreground: 40 20% 92%;
+    --popover: 30 10% 10%;
+    --popover-foreground: 42 20% 92%;
 
-    --primary: 0 0% 5%;
-    --primary-foreground: 40 20% 92%;
+    --primary: 42 35% 65%;            /* Muted Gold */
+    --primary-foreground: 30 10% 10%;
 
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 40 20% 92%;
+    --secondary: 42 30% 55%;          /* Warm Beige Accent */
+    --secondary-foreground: 30 10% 10%;
 
-    --muted: 0 0% 20%;
-    --muted-foreground: 40 10% 60%;
+    --muted: 30 10% 25%;
+    --muted-foreground: 42 20% 80%;
 
-    --accent: 42 78% 65%;
-    --accent-foreground: 0 0% 10%;
+    --accent: 42 25% 70%;             /* Cream-Gold Highlight */
+    --accent-foreground: 30 10% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 40 20% 92%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 42 20% 92%;
 
-    --border: 0 0% 20%;
-    --input: 0 0% 20%;
-    --ring: 42 78% 65%;
+    --border: 30 10% 20%;
+    --input: 30 10% 20%;
+    --ring: 42 35% 60%;
 
-    --radius: 0.25rem;
-    
-    /* Custom luxury tokens */
-    --gold: 42 78% 65%;
-    --gold-light: 42 78% 75%;
-    --cream: 40 20% 92%;
-    --charcoal: 0 0% 15%;
-    --shadow-elegant: 0 0% 0%;
+    --radius: 0.75rem;                /* Rounded corners for modern softness */
+
+    /* ===== Luxury Tokens ===== */
+    --gold: 42 35% 65%;
+    --gold-light: 42 35% 75%;
+    --cream: 42 25% 85%;
+    --charcoal: 30 10% 8%;
+    --shadow-elegant: 0 0% 0% / 0.4;
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* ===== Sidebar & Card ===== */
+    --sidebar-background: 30 10% 8%;
+    --sidebar-foreground: 42 20% 92%;
+    --sidebar-primary: 42 35% 60%;
+    --sidebar-primary-foreground: 30 10% 10%;
+    --sidebar-accent: 42 35% 60%;
+    --sidebar-accent-foreground: 30 10% 10%;
+    --sidebar-border: 30 10% 20%;
+    --sidebar-ring: 42 35% 60%;
   }
 
   .dark {
-    --background: 0 0% 7%;
-    --foreground: 40 20% 92%;
+    --background: 30 10% 8%;
+    --foreground: 42 20% 92%;
   }
 }
 
+/* ===== Global Base Styles ===== */
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border transition-colors duration-300;
+  }
+
+  html, body {
+    @apply w-full overflow-x-hidden scroll-smooth;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    @apply font-display text-primary tracking-wide leading-tight;
+  }
+
+  a {
+    @apply text-accent hover:text-gold-light transition-colors;
+  }
+
+  img {
+    @apply rounded-xl shadow-lg max-w-full h-auto object-cover;
+  }
+
+  section {
+    @apply px-4 sm:px-6 md:px-8 lg:px-16 xl:px-20;
+  }
+
+  /* ===== Typography Responsiveness ===== */
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-7xl lg:text-8xl;
+  }
+  h2 {
+    @apply text-3xl sm:text-4xl md:text-5xl;
+  }
+  p {
+    @apply text-base sm:text-lg leading-relaxed;
+  }
+
+  /* ===== Subtle fade effect ===== */
+  .fade-in {
+    animation: fade-in 0.8s ease-out both;
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* ===== Responsive Utility Enhancements ===== */
+@layer components {
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-16;
+  }
+
+  .card {
+    @apply bg-card border border-border rounded-xl shadow-md hover:shadow-lg transition-all duration-500;
+  }
+
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10;
+  }
+
+  .text-balance {
+    text-wrap: balance;
   }
 }
